@@ -1,0 +1,12 @@
+target/
+node_modules/
+*.log
+
+# 本机环境与生成物
+.pi/settings.json
+.pi/mcp.json
+src-tauri/gen/
+*.bak
+.DS_Store
+.vscode/
+.idea/

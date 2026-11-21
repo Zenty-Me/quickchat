@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost" />
+    <title>quickchat</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bar" data-tauri-drag-region>
+      <span class="brand" data-tauri-drag-region>quickchat</span>
+      <button id="close" class="icon" title="隐藏 (Esc)">×</button>
+    </div>
+
+    <main id="ask">
+      <textarea id="q" rows="2" placeholder="问点什么… (粘贴或复制一段文本后按热键会自动带入)" autofocus></textarea>
+      <div class="hint">
+        <span id="status">Enter 发送 · Shift+Enter 换行 · Esc 隐藏</span>
+        <span class="spacer"></span>
+        <button id="settings-btn" class="link">设置</button>
+      </div>
+      <section id="answer" hidden></section>
+      <div id="actions" hidden>
+        <button id="copy">复制</button>
+        <button id="followup">继续追问</button>
+        <button id="new">新问题</button>
+      </div>
+    </main>
+
+    <main id="settings" hidden>
+      <div class="field">
+        <span class="lbl">服务商</span>
+        <select id="s-provider"></select>
+      </div>
+      <div class="scroll">
+        <div class="row">
+          <div class="field">
+            <span class="lbl">名称</span>
+            <input id="s-name" spellcheck="false" placeholder="给自己看的名字" />
+          </div>
+          <div class="field">
+            <span class="lbl">协议</span>
+            <select id="s-protocol">
+              <option value="openai">OpenAI 兼容</option>
+              <option value="anthropic">Anthropic</option>
+              <option value="gemini">Gemini</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <span class="lbl">接口地址</span>
+          <input id="s-base" spellcheck="false" placeholder="https://api.openai.com/v1" />
+        </div>
+        <div class="field">
+          <span class="lbl">模型</span>
+          <div class="row">
+            <input id="s-model" list="model-list" spellcheck="false" autocomplete="off" placeholder="gpt-4o-mini" />
+            <button id="s-models" class="link">拉取模型</button>
+          </div>
+          <datalist id="model-list"></datalist>
+        </div>
+        <div class="field">
+          <span class="lbl">API Key <span class="muted" id="key-state"></span></span>
+          <input id="s-key" type="password" spellcheck="false" placeholder="留空则不修改" />
+        </div>
+        <div class="row">
+          <button id="test">测试连接</button>
+          <span id="test-state" class="muted"></span>
+        </div>
+      </div>
+      <div class="hint">
+        <button id="s-del" class="link">删除此服务商</button>
+        <span class="spacer"></span>
+        <button id="save">保存</button>
+        <button id="back" class="link">返回</button>
+      </div>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
